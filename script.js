@@ -26,14 +26,23 @@ function updateYearProgress() {
   // Get DOM elements
   const progressBar = document.getElementById("yearProgress");
   const progressText = document.getElementById("progressText");
-
+  const dayLeft = document.getElementById("dayLeft");
+  const dateToday = document.getElementById("dateToday");
   // Format the percentage to 2 decimal places (e.g., 75.34%)
   const displayPercent = percentageRemaining.toFixed(2) + "%";
 
   // Update the UI
   progressBar.style.width = displayPercent;
   progressText.textContent = displayPercent;
-
+  dayLeft.textContent =
+    "Days Left: " + daysRemaining + " of " + totalDaysInYear + " days";
+  displayPercent < 30
+    ? (dayLeft.style.color = "red")
+    : displayPercent < 50
+    ? (dayLeft.style.color = "yellow")
+    : (dayLeft.style.color = "green");
+  dateToday.textContent = now.toDateString();
+  dateToday.style.color = "gray";
   // If the bar gets too small, keep the text visible by pushing it outside or hiding it
   if (percentageRemaining < 5) {
     progressText.style.color = "#333";
