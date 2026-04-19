@@ -1,6 +1,50 @@
 function updateYearProgress() {
-  const now = new Date();
+  const now = new Date(); // Current exact moment
   const currentYear = now.getFullYear();
+  const month = now.getMonth();
+  // -----------------------------------------------------
+  // MONTH PROGRESS BAR
+  // Start of THIS month (e.g., April 1st, 00:00:00)
+  const startOfThisMonth = new Date(currentYear, month, 1);
+
+  // Start of NEXT month (e.g., May 1st, 00:00:00)
+  const startOfNextMonth = new Date(currentYear, month + 1, 1);
+
+  const msTotal = startOfNextMonth.getTime() - startOfThisMonth.getTime();
+  const msLeft = startOfNextMonth.getTime() - now.getTime();
+
+  // DEBUGGING: If msLeft is 0, these two will be identical
+  console.log("Now: ", now.toLocaleString());
+  console.log("Next Month Start: ", startOfNextMonth.toLocaleString());
+  console.log("MS Left: ", msLeft);
+
+  if (msTotal > 0) {
+    const percentageMonthLeft = (msLeft / msTotal) * 100;
+    const displayMonthPercentage = percentageMonthLeft.toFixed(2);
+
+    const progressMonthText = document.getElementById("progressMonthText");
+    const monthProgress = document.getElementById("monthProgress");
+
+    // 1. Update Text and Width
+    progressMonthText.textContent = displayMonthPercentage + "%";
+    monthProgress.style.width = displayMonthPercentage + "%";
+
+    // 2. Color Logic (Compare against a number, not a string)
+    const percentNum = parseFloat(displayMonthPercentage);
+
+    if (percentNum < 30) {
+      monthProgress.style.backgroundColor = "#d62828";
+      progressMonthText.style.color = "transparent"; // Hide text when red
+    } else if (percentNum < 50) {
+      monthProgress.style.backgroundColor = "#fcbf49";
+      progressMonthText.style.color = "white"; // Reset color if needed
+    } else {
+      monthProgress.style.backgroundColor = "#9fbf6a";
+      progressMonthText.style.color = "white"; // Reset color if needed
+    }
+  }
+
+  //-----------------------------------------------------------
 
   // Find the exact start of the current year
   const startOfYear = new Date(currentYear, 0, 1);
@@ -36,6 +80,7 @@ function updateYearProgress() {
   progressText.textContent = displayPercent;
   dayLeft.textContent =
     "Days Left: " + daysRemaining + " of " + totalDaysInYear + " days";
+
   displayPercent < 30
     ? (dayLeft.style.color = "red")
     : displayPercent < 50
