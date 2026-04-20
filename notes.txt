@@ -1,0 +1,44 @@
+Refined code for task: 
+addTask.addEventListener("click", (e) => {
+  e.preventDefault();
+  const currentValue = taskInput.value.trim(); // .trim() prevents adding empty spaces
+
+  if (!currentValue) {
+    // Optional: show the message if input is empty
+    message.style.display = "block";
+    return;
+  } 
+
+  message.style.display = "none";
+
+  // Create elements
+  const li = document.createElement("li");
+  const checkbox = document.createElement("input");
+  const deleteBtn = document.createElement("button");
+  const span = document.createElement("span"); // Better than a raw text node for styling
+
+  checkbox.type = "checkbox";
+  deleteBtn.textContent = "Delete";
+  span.textContent = " " + currentValue;
+
+  // Assembly
+  li.append(checkbox, span, deleteBtn); // Modern way to append multiple elements
+  task.appendChild(li);
+
+  // Toggle "completed" style
+  checkbox.addEventListener("change", () => {
+    span.style.textDecoration = checkbox.checked ? "line-through" : "none";
+    span.style.color = checkbox.checked ? "gray" : "black";
+  });
+
+  // Delete functionality
+  deleteBtn.addEventListener("click", () => {
+    li.remove();
+    // Check if list is empty to show message again
+    if (task.children.length === 0) {
+      message.style.display = "block";
+    }
+  });
+
+  taskInput.value = "";
+});

@@ -101,3 +101,12 @@ updateYearProgress();
 
 // Optional: Update the bar every hour so it stays accurate without refreshing
 setInterval(updateYearProgress, 1000 * 60 * 60);
+
+
+
+
+
+
+
+
+
