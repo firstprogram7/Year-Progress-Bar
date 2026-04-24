@@ -33,8 +33,10 @@ function updateYearProgress() {
     const percentNum = parseFloat(displayMonthPercentage);
 
     if (percentNum < 30) {
-      monthProgress.style.backgroundColor = "#d62828";
-      progressMonthText.style.color = "transparent"; // Hide text when red
+      monthProgress.style.backgroundColor = "#e01e37";
+        progressMonthText.style.color = "#6e1423";
+        progressMonthText.style.fontSize = "0.7rem";
+        progressMonthText.style.fontWeight = "900";
     } else if (percentNum < 50) {
       monthProgress.style.backgroundColor = "#fcbf49";
       progressMonthText.style.color = "white"; // Reset color if needed
