@@ -30,7 +30,7 @@ if(!currentValue){
   // 4. Assemble: Add text box first and then text to the li
   li.appendChild(checkbox);
   li.appendChild(taskText);
-  li.appendChild(deleteBtn)
+  li.appendChild(deleteBtn);
   // 5. Add finished li to the list
   task.appendChild(li);
   // 6. Make the delete button functional
